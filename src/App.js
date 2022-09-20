@@ -28,15 +28,22 @@ const App = () => {
       <button onClick={handleGoodClick}>good</button>
       <button onClick={handleNeutralClick}>neutral</button>
       <button onClick={handleBadClick}>bad</button>
-      <Statistics/>
-      <p>Good : {good}</p>
-      <p>Neutral : {neutral}</p>
-      <p>Bad: {bad}</p>
-      <p>Total votes: {total}</p>
-      <p>Average: {avg}</p>
-      <p>Positiiviset: {positivesPercent}</p>
+      <Votes good = {good} bad = {bad} neutral = {neutral}/>
+      <h2>Statistics</h2>
+      <Statistics total = {total} avg = {avg} positiiviset = {positivesPercent}/>
     </div>
   )
+}
+const Votes = (props) =>{
+  return(
+  <div>
+      <p>Good : {props.good}</p>
+      <p>Neutral : {props.neutral}</p>
+      <p>Bad: {props.bad}</p>
+  </div>
+  //tanne ehtoa viela
+  )
+  
 }
 
 const Header = () =>{
@@ -44,10 +51,21 @@ const Header = () =>{
       <h2>Give feeback</h2>
     )
 }
-const Statistics = () =>{
-  return(
-    <h2>Statistics</h2>
-  )
+const Statistics = (props) =>{
+ 
+  if(props.total > 0){
+    return(
+      <div>
+      <p>Total votes: {props.total}</p>
+    <p>Average: {props.avg}</p>
+    <p>Positives %: {props.positiiviset}</p>
+    </div>
+    )
+  }else{
+    return(
+      <p>No feedback given!</p>
+    )
+  }
 }
 
 export default App
