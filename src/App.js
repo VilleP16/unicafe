@@ -28,22 +28,22 @@ const App = () => {
       <button onClick={handleGoodClick}>good</button>
       <button onClick={handleNeutralClick}>neutral</button>
       <button onClick={handleBadClick}>bad</button>
-      <Votes good = {good} bad = {bad} neutral = {neutral}/>
+      <Votes good = {good} bad = {bad} neutral = {neutral} total = {total}/>
       <h2>Statistics</h2>
       <Statistics total = {total} avg = {avg} positiiviset = {positivesPercent}/>
     </div>
   )
 }
 const Votes = (props) =>{
-  return(
-  <div>
-      <p>Good : {props.good}</p>
-      <p>Neutral : {props.neutral}</p>
-      <p>Bad: {props.bad}</p>
-  </div>
-  //tanne ehtoa viela
-  )
-  
+  if(props.total > 0){
+    return(
+      <div>
+          <p>Good : {props.good}</p>
+          <p>Neutral : {props.neutral}</p>
+          <p>Bad: {props.bad}</p>
+      </div>
+      )
+  } 
 }
 
 const Header = () =>{
@@ -51,6 +51,7 @@ const Header = () =>{
       <h2>Give feeback</h2>
     )
 }
+
 const Statistics = (props) =>{
  
   if(props.total > 0){
