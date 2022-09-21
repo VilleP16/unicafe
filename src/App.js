@@ -8,6 +8,14 @@ const App = () => {
   const total = good + bad + neutral
   const avg = (good-bad) / (good +bad +neutral)
   const positivesPercent = good / (good +bad +neutral) * 100
+  const goodText = "Good"
+  const neutralText = "Neutral"
+  const badText = "Bad"
+  const totalVotesText = "Total votes: "
+  const averageText = "Average: "
+  const positivesPercentText = "Positives %: "
+  const giveFeedBackText = "Give feedback";
+  const statisticsText = "Statistics:"
 
   const handleGoodClick = () =>{
     setGood(good + 1)
@@ -20,53 +28,44 @@ const App = () => {
   const handleBadClick = () =>{
     setBad(bad + 1)
   }
-  
 
+  
   return (
     <div>
-      <Header/>
-      <button onClick={handleGoodClick}>good</button>
-      <button onClick={handleNeutralClick}>neutral</button>
-      <button onClick={handleBadClick}>bad</button>
-      <Votes good = {good} bad = {bad} neutral = {neutral} total = {total}/>
-      <h2>Statistics</h2>
-      <Statistics total = {total} avg = {avg} positiiviset = {positivesPercent}/>
+      <Header text = {giveFeedBackText}/>
+      <Button text = {goodText} handleClick = {handleGoodClick}/>
+      <Button text = {neutralText} handleClick = {handleNeutralClick}/>
+      <Button text = {badText} handleClick = {handleBadClick}/>
+      <StatisticLine text = {goodText} value = {good} total = {total}/>
+      <StatisticLine text = {neutralText} value = {neutral} total = {total}/>
+      <StatisticLine text = {badText} value = {bad} total = {total}/>
+      <Header text = {statisticsText}/>
+      <StatisticLine text = {totalVotesText} value = {total} total = {total}/>
+      <StatisticLine text = {averageText} value = {avg} total = {total}/>
+      <StatisticLine text = {positivesPercentText} value = {positivesPercent} total = {total}/>   
     </div>
   )
 }
-const Votes = (props) =>{
+
+const StatisticLine = (props) =>{
   if(props.total > 0){
     return(
-      <div>
-          <p>Good : {props.good}</p>
-          <p>Neutral : {props.neutral}</p>
-          <p>Bad: {props.bad}</p>
-      </div>
-      )
-  } 
-}
-
-const Header = () =>{
-    return(
-      <h2>Give feeback</h2>
-    )
-}
-
-const Statistics = (props) =>{
- 
-  if(props.total > 0){
-    return(
-      <div>
-      <p>Total votes: {props.total}</p>
-    <p>Average: {props.avg}</p>
-    <p>Positives %: {props.positiiviset}</p>
-    </div>
-    )
-  }else{
-    return(
-      <p>No feedback given!</p>
+      <p>{props.text}: {props.value}</p>
     )
   }
+}
+const Button = (props) =>{
+  return(
+    <button onClick={props.handleClick}>
+    {props.text}
+  </button>
+  )
+  
+}
+const Header = (props) =>{
+    return(
+      <h2>{props.text}</h2>
+    )
 }
 
 export default App
